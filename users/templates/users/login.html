@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% load widget_tweaks %}
+
+{% block title %}Login{% endblock %}
+
+{% block user_login %}
+<br>
+<h2>Login</h2>
+<hr>
+<form method="post">
+    {% csrf_token %}
+    <!-- to be used with django widget tweaks -->
+
+    {% if form.non_field_errors %}
+    <div class="alert alert-danger" role="alert" style="width: 78%">
+        {% for error in form.non_field_errors %}
+        {{ error }}
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    {% for field in form.visible_fields %}
+    {% render_field field class="form-control" style="width: 78%;" placeholder=field.label|title %}
+    <br>
+    {% endfor %}
+    <button type="submit" style="width: 78%" class="btn btn-primary">Log In</button>
+    <br>
+    <hr>
+    <p>
+        <small>Don't have an Account?</small>
+        <a href="{% url 'register' %}">Sign Up</a>
+    </p>
+</form>
+{% endblock %}

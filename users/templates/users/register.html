@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% load widget_tweaks %}
+
+{% block title %}Register{% endblock %}
+
+{% block user_register %}
+<br>
+<h2>Welcome, Sign up to continue</h2>
+<hr>
+<form method="post">
+    {% csrf_token %}
+    <!-- to be used with django widget tweaks -->
+
+    {% if form.non_field_errors %}
+    <div class="alert alert-danger" role="alert">
+        {% for error in form.non_field_errors %}
+        {{ error }}
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    {% for field in form.visible_fields %}
+
+    {% if form.is_bound %}
+    {% if field.errors %}
+    {% render_field field class="form-control is-invalid" style="width: 78%;" %}
+    {% for error in field.errors %}
+    <div class="invalid-feedback">
+        {{ error }}
+    </div>
+    {% endfor %}
+    {% else %}
+    {% render_field field class="form-control is-valid" style="width: 78%;" %}
+    {% endif %}
+    {% else %}
+    {% render_field field class="form-control" style="width: 78%;" placeholder=field.label|title %}
+    {% endif %}
+
+    <small class="form-text text-muted">{{ field.help_text }}</small>
+    <br>
+    {% endfor %}
+    <br>
+    <button type="submit" style="width: 78%" class="btn btn-primary">Sign Up</button>
+    <br>
+    <hr>
+    <p>
+        <small>Already have an Account?</small>
+        <a href="{% url 'login' %}">Sign In</a>
+    </p>
+</form>
+
+{% endblock %}
