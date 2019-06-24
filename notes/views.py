@@ -1,10 +1,11 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from .forms import NoteForm
 from django.contrib import messages
 from django.views.decorators.csrf import csrf_exempt
 from .models import Note, Shared
+from users.models import User
 import json
 
 
@@ -25,7 +26,9 @@ def home(request):
         response_data['created'] = data.created_date.strftime(
             '%B %d, %Y %I:%M %p')
         response_data['author'] = data.author.full_name
-        note = response_data
+        note = json.dumps(response_data)
+        note = json.loads(note)
+        return JsonResponse(note)
     else:
         form = NoteForm()
 
@@ -33,4 +36,10 @@ def home(request):
     notes = Note.objects.all().filter(
         author=request.user.id).order_by('id').reverse()
 
-    return render(request, 'home.html', {'form': form, 'notes': notes, 'note': note})
+    users = User.objects.all().exclude(id=request.user.id)
+    return render(request, 'home.html', {'form': form, 'notes': notes, 'users': users})
+
+
+def showPeople(request):
+    if request.method == 'POST':
+        print(request.POST.get('name'))

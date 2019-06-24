@@ -7,15 +7,10 @@ body, html {
 }
 
 .bgLogged {
-    background: url(../images/logged.jpg) no-repeat center center fixed; 
-  /* -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover; */
+    background: url("../images/logged.jpg") no-repeat center center fixed; 
 }
 
 .bg, .bgLogged {
-    /* background-image: url("../images/logged.jpg") no-repeat center center fixed; */
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -43,3 +38,4 @@ div.card {
     margin: 2%;
     float: left;
 }
+

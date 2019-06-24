@@ -80,14 +80,25 @@ WSGI_APPLICATION = 'codenicely_tests.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'test',
-        'USER': 'postgres',
-        'PASSWORD': 'musicrythm',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'code_nicely',
+        'USER': 'root',
+        'PASSWORD': '',
         'HOST': '127.0.0.1',
-        'POST': '5432'
+        'POST': '3306'
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'test',
+#         'USER': 'postgres',
+#         'PASSWORD': 'musicrythm',
+#         'HOST': '127.0.0.1',
+#         'POST': '5432'
+#     }
+# }
 
 
 # Password validation
